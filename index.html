@@ -1,22 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Project Genesis 5.0 - AURA Module"
-    />
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FINESIGHT — Practical Financial Advisor</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+  <div class="max-w-5xl mx-auto">
+    <h1 class="text-3xl font-bold text-blue-700 mb-4">FINESIGHT — Practical Financial Advisor</h1>
 
-    <title>AURA Dashboard</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  </body>
+    <div class="bg-white p-6 rounded-xl shadow mb-6">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm">Username</label>
+          <input id="user_id" value="demo_user" class="p-2 border w-full rounded" />
+        </div>
+        <div>
+          <label class="block text-sm">Age</label>
+          <input id="age" type="number" value="25" class="p-2 border w-full rounded" />
+        </div>
+
+        <div>
+          <label class="block text-sm">Monthly Income (₹)</label>
+          <input id="income" type="number" value="50000" class="p-2 border w-full rounded" />
+        </div>
+        <div>
+          <label class="block text-sm">Dependents</label>
+          <input id="dependents" type="number" value="0" class="p-2 border w-full rounded" />
+        </div>
+
+        <div>
+          <label class="block text-sm">Fixed Monthly Expenses (₹)</label>
+          <input id="fixed_expenses" type="number" value="15000" class="p-2 border w-full rounded" />
+        </div>
+        <div>
+          <label class="block text-sm">Variable Monthly Expenses (₹)</label>
+          <input id="variable_expenses" type="number" value="10000" class="p-2 border w-full rounded" />
+        </div>
+
+        <div>
+          <label class="block text-sm">Total Debt (₹)</label>
+          <input id="debt" type="number" value="50000" class="p-2 border w-full rounded" />
+        </div>
+        <div>
+          <label class="block text-sm">Credit Score (300-850)</label>
+          <input id="credit_score" type="number" value="650" class="p-2 border w-full rounded" />
+        </div>
+
+        <div>
+          <label class="block text-sm">Risk Tolerance</label>
+          <select id="risk_tolerance" class="p-2 border w-full rounded">
+            <option value="low">Low</option>
+            <option value="moderate" selected>Moderate</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm">Investment Experience</label>
+          <select id="investment_experience" class="p-2 border w-full rounded">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm">Savings Goal Amount (₹)</label>
+          <input id="savings_goal" type="number" value="0" class="p-2 border w-full rounded" />
+        </div>
+        <div>
+          <label class="block text-sm">Target Months for Savings Goal</label>
+          <input id="savings_target_months" type="number" value="12" class="p-2 border w-full rounded" />
+        </div>
+      </div>
+
+      <div class="mt-4 flex gap-3">
+        <button id="analyzeBtn" class="bg-blue-600 text-white px-4 py-2 rounded">Analyze</button>
+        <button id="speakBtn" class="bg-green-600 text-white px-4 py-2 rounded">🎙 Assistant</button>
+      </div>
+    </div>
+
+    <div id="report" class="hidden bg-white p-6 rounded-xl shadow">
+      <h2 class="text-2xl font-semibold mb-2">Personalized Report</h2>
+
+      <div class="grid md:grid-cols-2 gap-4 mb-4">
+        <div>
+          <p class="text-sm text-gray-600">Risk</p>
+          <p id="risk_label" class="text-lg font-bold"></p>
+          <p id="risk_score" class="text-sm text-gray-600"></p>
+        </div>
+        <div>
+          <p class="text-sm text-gray-600">Predicted Next Month Expense</p>
+          <p id="predicted_expense" class="text-lg font-bold"></p>
+        </div>
+
+        <div>
+          <p class="text-sm text-gray-600">Emergency Fund</p>
+          <p id="ef_target" class="text-lg font-bold"></p>
+        </div>
+        <div>
+          <p class="text-sm text-gray-600">Disposable Income</p>
+          <p id="disposable" class="text-lg font-bold"></p>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <h3 class="font-semibold">Budget Plans</h3>
+        <div id="budget50" class="bg-gray-50 p-3 rounded mt-2"></div>
+        <div id="customBudget" class="bg-gray-50 p-3 rounded mt-2"></div>
+      </div>
+
+      <div class="mb-4">
+        <h3 class="font-semibold">Debt Payoff Plan</h3>
+        <div id="debt_plan" class="bg-gray-50 p-3 rounded"></div>
+      </div>
+
+      <div class="mb-4 grid md:grid-cols-2 gap-4">
+        <div>
+          <h3 class="font-semibold">Investment Allocation (suggested)</h3>
+          <div id="invest_alloc" class="bg-gray-50 p-3 rounded"></div>
+        </div>
+        <div>
+          <h3 class="font-semibold">Savings Plan</h3>
+          <div id="savings_plan" class="bg-gray-50 p-3 rounded"></div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="font-semibold">Advice</h3>
+        <ul id="advice_list" class="list-disc pl-5"></ul>
+      </div>
+
+      <div class="mt-6">
+        <h3 class="font-semibold">Practical Ways to Earn / Learn</h3>
+        <div id="extras" class="bg-gray-50 p-3 rounded"></div>
+      </div>
+
+      <div class="mt-6 grid md:grid-cols-2 gap-4">
+        <div>
+          <h3 class="font-semibold">Investment Allocation Chart</h3>
+          <canvas id="allocationChart"></canvas>
+        </div>
+        <div>
+          <h3 class="font-semibold">History (Income / Expenses / Debt)</h3>
+          <canvas id="historyChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/static/script.js"></script>
+</body>
 </html>

@@ -1,6 +1,3 @@
-fastapi
-uvicorn[standard]
+Flask
+numpy
 scikit-learn
-pandas
-joblib
-fastapi-cors
