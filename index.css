@@ -1,0 +1,216 @@
+/* Using the new 'Inter' font with a nice fallback system */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+               'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 24px;
+  /* A subtle, modern gradient background */
+  background: linear-gradient(135deg, #f0f4f8 0%, #e8eef2 100%);
+  color: #334155;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Main app container */
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Main dashboard layout */
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* Main project title */
+.main-title {
+  text-align: center;
+  color: #0F172A;
+  font-weight: 700;
+  font-size: 2.25rem;
+  margin-bottom: 8px;
+}
+
+/* Main project subtitle */
+.main-subtitle {
+  text-align: center;
+  color: #475569;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-top: 0;
+  margin-bottom: 32px;
+}
+
+/* The 'card' style */
+.card {
+  background: #f0f4f8;
+  border-radius: 16px;
+  /* Soft inner and outer shadows for a 'neumorphic' look */
+  box-shadow: 
+    -8px -8px 16px rgba(255, 255, 255, 0.8),
+    8px 8px 16px rgba(174, 174, 192, 0.2);
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  /* Lifts the card slightly on hover */
+  transform: translateY(-4px);
+  box-shadow: 
+    -10px -10px 20px rgba(255, 255, 255, 0.9),
+    10px 10px 20px rgba(174, 174, 192, 0.3);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #0F172A; /* Darker text for titles */
+  font-weight: 600;
+  border-bottom: 2px solid #38BDF8; /* A nice blue accent */
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+}
+
+/* Form styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+/* Customizing the range sliders */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  background: #CBD5E1; /* Slider track */
+  border-radius: 5px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #38BDF8; /* Slider thumb */
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #38BDF8;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Upgraded button */
+button {
+  background: #0EA5E9; /* A vibrant blue */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+}
+
+button:hover {
+  background: #0284C7; /* Darker blue on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(56, 189, 248, 0.4);
+}
+
+button:disabled {
+  background: #94A3B8;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Risk display styling */
+.risk-display {
+  text-align: center;
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border: 2px solid;
+}
+
+.risk-low { 
+  background-color: #D1FAE5; 
+  color: #065F46;
+  border-color: #6EE7B7;
+}
+.risk-medium { 
+  background-color: #FEF3C7; 
+  color: #92400E;
+  border-color: #FCD34D;
+}
+.risk-high { 
+  background-color: #FEE2E2; 
+  color: #991B1B;
+  border-color: #FCA5A5;
+}
+
+.risk-display h3 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+/* Wellness plan card */
+.wellness-plan {
+  background: #E2E8F0; /* Slightly darker background */
+  border-radius: 8px;
+  padding: 4px 24px;
+  max-height: 350px;
+  overflow-y: auto;
+  color: #1E293B;
+  border: 1px solid #CBD5E1;
+}
+
+.wellness-plan ul {
+  padding-left: 20px;
+}
+.wellness-plan li {
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.loading {
+  text-align: center;
+  color: #475569;
+  font-weight: 500;
+  padding: 20px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 900px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+  body {
+    padding: 16px;
+  }
+}

@@ -1,5 +1,6 @@
-streamlit
-numpy
-pandas
+fastapi
+uvicorn[standard]
 scikit-learn
-matplotlib
+pandas
+joblib
+fastapi-cors
